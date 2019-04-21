@@ -162,5 +162,9 @@ except ImportError:
 
     # ここから下はWhiteNoiseを使ってStaticファイルを公開するため
     MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
-    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+    # whitenoise 3.3.1 の場合
+    #STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+    # whitenoise 4.1.2 の場合
+    # http://whitenoise.evans.io/en/stable/changelog.html#v4-0
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

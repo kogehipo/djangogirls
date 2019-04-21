@@ -24,6 +24,15 @@ try:
         path('', include('blog.urls')),
     ]
 
+    # DEBUG=Falseの時のデバッグ手段
+    # http://d.hatena.ne.jp/karasuyamatengu/20100521/1274399876
+    # 組み込みの500エラーハンドラーを自前のにすり替える。
+    # urls.pyでやるのがいいだろう。
+    # 参照： http://docs.djangoproject.com/en/dev/topics/http/views/
+    from . import exception_logger
+    from django.urls import *
+    handler500=exception_logger.server_error
+
 except ImportError:
     # Djando 1.11.x系
     from django.conf.urls import include, url
